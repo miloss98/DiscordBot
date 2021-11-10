@@ -49,4 +49,4 @@ client.on("messageCreate", (msg) => {
 
 keepAlive();
 
-client.login("OTA4MDY3NDg5ODEwODc4NDk0.YYwVwA.Z9Dg1MKlzdKU9oYvZPldahpVbNg");
+client.login("OTA4MDcxNDk5OTA5NDM5NTM4.YYwZfA.uNXdKJh4BRHCKymefyEB-oO3Kgo");
