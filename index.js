@@ -23,6 +23,8 @@ client.once("ready", () => {
   console.log("GOSPODAR VREMENA JE SADA DOSTUPAN !");
 })
 
+//Komentar
+
 
 
 client.on("messageCreate", (msg) => {
