@@ -51,5 +51,6 @@ client.on("messageCreate", (msg) => {
 
 keepAlive();
 
-client.login("OTA4MDcxNDk5OTA5NDM5NTM4.YYwZfA.dGljJRcvut09Qofm1AnkANW9G-0");
+const token = process.env['token']
+client.login(token);
 
