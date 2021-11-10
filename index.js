@@ -5,9 +5,9 @@ const fetch = require("node-fetch");
 
 const prefix = "$";
 
-function getQuote(){
-    return fetch("https://zenquotes.io/api/random")
-    .then (res => {
+function getQuote() {
+  return fetch("https://zenquotes.io/api/random")
+    .then(res => {
       return res.json()
     })
     .then(data => {
@@ -35,7 +35,7 @@ client.on("messageCreate", (msg) => {
     msg.reply("Cigan!");
   } else if (command === "seha") {
     msg.reply("Cigan najveci!");
-  } else if(msg.content === "$inspire"){
+  } else if (msg.content === "$inspire") {
     getQuote().then(quote => msg.reply(quote))
   } else if (command === "micic") {
     msg.reply("Moj brat, gospodin! GOSPODAR VREMENA");
@@ -43,11 +43,13 @@ client.on("messageCreate", (msg) => {
     msg.reply("Najveci jebac :D ");
   } else if (command === "kale") {
     msg.reply("Mmmmmmmbraleeeeeeeee!");
-  } 
-  
+  } else if (command === "proba") {
+    msg.reply("Radiiiiiiii!");
+  }
+
 })
 
 keepAlive();
 
-client.login("OTA4MDcxNDk5OTA5NDM5NTM4.YYwZfA.7GT5ggoByBNIg0xU9BkQcDtcNW0");
+client.login("OTA4MDcxNDk5OTA5NDM5NTM4.YYwZfA.dGljJRcvut09Qofm1AnkANW9G-0");
 
