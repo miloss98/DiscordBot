@@ -5,9 +5,9 @@ const fetch = require("node-fetch");
 
 const prefix = "$";
 
-function getQuote(){
-    return fetch("https://zenquotes.io/api/random")
-    .then (res => {
+function getQuote() {
+  return fetch("https://zenquotes.io/api/random")
+    .then(res => {
       return res.json()
     })
     .then(data => {
@@ -20,8 +20,10 @@ const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 client.once("ready", () => {
-  console.log("GOSPODAR VREMENA JE SADA DOSTUPAN !");
+  console.log("Hasbulla vas sada posmatra !!");
 })
+
+//Komentar
 
 
 
@@ -35,7 +37,7 @@ client.on("messageCreate", (msg) => {
     msg.reply("Cigan!");
   } else if (command === "seha") {
     msg.reply("Cigan najveci!");
-  } else if(msg.content === "$inspire"){
+  } else if (msg.content === "$inspire") {
     getQuote().then(quote => msg.reply(quote))
   } else if (command === "micic") {
     msg.reply("Moj brat, gospodin! GOSPODAR VREMENA");
@@ -43,8 +45,12 @@ client.on("messageCreate", (msg) => {
     msg.reply("Najveci jebac :D ");
   } else if (command === "kale") {
     msg.reply("Mmmmmmmbraleeeeeeeee!");
-  } 
-  
+  } else if (command === "proba") {
+    msg.reply("Radiiiiiiii!");
+  } else if (command === "pokusaj") {
+    msg.reply("pokusaj uspesan!");
+  }
+
 })
 
 keepAlive();
