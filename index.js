@@ -23,6 +23,8 @@ client.once("ready", () => {
   console.log("Hasbulla vas sada posmatra !!");
 })
 
+//Komentar
+
 
 
 client.on("messageCreate", (msg) => {
