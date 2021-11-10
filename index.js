@@ -45,6 +45,8 @@ client.on("messageCreate", (msg) => {
     msg.reply("Mmmmmmmbraleeeeeeeee!");
   } else if (command === "proba") {
     msg.reply("Radiiiiiiii!");
+  } else if (command === "pokusaj") {
+    msg.reply("pokusaj uspesan!");
   }
 
 })
