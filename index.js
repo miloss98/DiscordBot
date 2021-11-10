@@ -24,8 +24,7 @@ client.once("ready", () => {
 })
 
 //Komentar
-
-
+// ProbaTest2
 
 client.on("messageCreate", (msg) => {
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
