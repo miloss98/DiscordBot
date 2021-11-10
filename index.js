@@ -20,7 +20,7 @@ const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 client.once("ready", () => {
-  console.log("GOSPODAR VREMENA JE SADA DOSTUPAN !");
+  console.log("Hasbulla vas sada posmatra !!");
 })
 
 
@@ -49,4 +49,4 @@ client.on("messageCreate", (msg) => {
 
 keepAlive();
 
-client.login("OTA2NTcxMDExMTQ1NzQwMzQ5.YYakDA.fzoTZ-jD9WOlGTR0uCjsOnLpuMg");
+client.login("OTA4MDY3NDg5ODEwODc4NDk0.YYwVwA.Z9Dg1MKlzdKU9oYvZPldahpVbNg");
