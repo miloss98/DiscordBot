@@ -9,6 +9,7 @@ const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAG
 //Bot prefix
 const prefix = "$";
 
+
 //.env secrets
 const GUILD_ID = process.env['guild_id'];
 const CLIENT_ID = process.env['client_id'];
