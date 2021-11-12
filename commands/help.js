@@ -17,6 +17,7 @@ module.exports = {
 	  .addFields(
 		  { name: "\:one:  $inspire", value: 'Inspirational quote.' },
 		  { name: "\:two:  $joke", value: 'Replies with a joke.' },
+      { name: "\:three:  $clear", value: 'Delete desired amount of messages.' },
   	)
 	  .setImage('https://theancestory.com/wp-content/uploads/2021/05/Mini_Khabib_with_Khabib_Nurmagomedov-300x291.jpg')
 	  .setTimestamp()
