@@ -64,6 +64,8 @@ client.on("messageCreate", (msg) => {
   } else if (command === 'clear'){
     client.commands.get('clear').execute(msg, args);
     //With this 2 lines of code we can call the command demanded by user from other files.
+  } else if (command === 'help'){
+    client.commands.get('help').execute(msg, args, Discord);
   }
 })
 
