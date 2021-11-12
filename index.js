@@ -22,8 +22,19 @@ for(const file of commandFiles){
   client.commands.set(command.name, command);
 }
 
+getJokes = () => {
+  return fetch('https://api.chucknorris.io/jokes/random')
+  .then(res => {
+    return res.json()
+  })
+  .then(data => {
+    return data.value;
+  })
+}
+
+
 //Zen quotes function + API
-function getQuote() {
+ getQuote = () => {
   return fetch("https://zenquotes.io/api/random")
     .then(res => {
       return res.json()
@@ -48,10 +59,10 @@ client.on("messageCreate", (msg) => {
 
   if (msg.content === "$inspire") {
     getQuote().then(quote => msg.reply(quote))
-  } else if (command === "proba") {
-    msg.reply("Radiiiiiiii!");   
-  } else if (command === 'test'){
-    client.commands.get('test').execute(msg, args);
+  } else if (command === "joke") {
+    getJokes().then(jokes => msg.reply(jokes))
+  } else if (command === 'clear'){
+    client.commands.get('clear').execute(msg, args);
     //With this 2 lines of code we can call the command demanded by user from other files.
   }
 })
