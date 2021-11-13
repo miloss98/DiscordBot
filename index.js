@@ -83,9 +83,21 @@ client.on("messageCreate", async (msg) => {
         let queue = client.player.createQueue(msg.guild.id);
         await queue.join(msg.member.voice.channel);
         let song = await queue.play(args.join(' ')).catch(_ => {
-            if(!guildQueue)
-                queue.stop();    
+            if(!guildQueue){
+              queue.stop(); 
+            }
         }); 
+        song.setData({
+          initMessage: msg
+          });
+        let queue2 = player.getQueue(msg.guild.id);
+        let { initMessage } = queue2.nowPlaying.data;
+        await initMessage.reply(`Now playing: ${song.name}`);
+        
+    }else if (command === 'nowplaying') {
+        msg.reply(`Now playing: ${guildQueue.nowPlaying}`);
+    }else if (command === 'stop') {
+        guildQueue.stop();
     }
 })
 
@@ -95,3 +107,5 @@ keepAlive();
 //.env secrets (bot token)
 const token = process.env['token']
 client.login(token);
+
+
