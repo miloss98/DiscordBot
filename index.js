@@ -98,6 +98,15 @@ client.on("messageCreate", async (msg) => {
         msg.reply(`Now playing: ${guildQueue.nowPlaying}`);
     }else if (command === 'stop') {
         guildQueue.stop();
+    }else if(command === 'playlist') {
+        let queue = client.player.createQueue(msg.guild.id);
+        await queue.join(msg.member.voice.channel);
+        let song = await queue.playlist(args.join(' ')).catch(_ => {
+            if(!guildQueue)
+                queue.stop();
+        });
+    }else if(command === 'skip') {
+        guildQueue.skip();
     }
 })
 

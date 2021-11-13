@@ -18,6 +18,10 @@ module.exports = {
 		  { name: "\:one:  $inspire", value: 'Inspirational quote.' },
 		  { name: "\:two:  $joke", value: 'Replies with a joke.' },
       { name: "\:three:  $clear", value: 'Delete desired amount of messages.' },
+      { name: "\:four:  $play", value: 'Plays the song. e.g: $play song name .' },
+      { name: "\:five:  $nowplaying", value: 'Shows the currently playing song.' },
+       { name: "\:six:  $skip", value: 'Skips currently playing song.' },
+      { name: "\:seven:  $stop", value: 'Stops currently playing song and disconnecting from channel.' },
   	)
 	  .setImage('https://theancestory.com/wp-content/uploads/2021/05/Mini_Khabib_with_Khabib_Nurmagomedov-300x291.jpg')
 	  .setTimestamp()
