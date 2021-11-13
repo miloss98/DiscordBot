@@ -3,16 +3,28 @@ const { Client, Intents } = require("discord.js");
 const keepAlive = require("./server");
 const fetch = require("node-fetch");
 const fs = require("fs");
+const { RepeatMode } = require('discord-music-player');
+const { Player } = require("discord-music-player");
 
-const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],});
+const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES]});
 
 //Bot prefix
 const prefix = "$";
 
-
 //.env secrets
 const GUILD_ID = process.env['guild_id'];
 const CLIENT_ID = process.env['client_id'];
+
+//Making new player
+const player = new Player(client, {
+    leaveOnEmpty: false, 
+});
+client.player = player;
+
+//Logging songs in the queue
+client.player.on('channelEmpty',  (queue) =>
+        console.log(`Everyone left the Voice Channel, queue ended.`)).on('songAdd',  (queue, song) =>
+        console.log(`Song ${song} was added to the queue.`));
 
 //Code which finds all files with .js extension
 client.commands = new Discord.Collection();
@@ -32,7 +44,6 @@ getJokes = () => {
   })
 }
 
-
 //Zen quotes function + API
  getQuote = () => {
   return fetch("https://zenquotes.io/api/random")
@@ -50,10 +61,12 @@ client.once("ready", () => {
 })
 
 //Commands
-client.on("messageCreate", (msg) => {
+client.on("messageCreate", async (msg) => {
+
+  let guildQueue = client.player.getQueue(msg.guild.id);
+
   //Bot will not react to prefixless messages
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
-
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
@@ -66,7 +79,14 @@ client.on("messageCreate", (msg) => {
     //With this 2 lines of code we can call the command demanded by user from other files.
   } else if (command === 'help'){
     client.commands.get('help').execute(msg, args, Discord);
-  }
+  } else if(command === 'play') {
+        let queue = client.player.createQueue(msg.guild.id);
+        await queue.join(msg.member.voice.channel);
+        let song = await queue.play(args.join(' ')).catch(_ => {
+            if(!guildQueue)
+                queue.stop();    
+        }); 
+    }
 })
 
 //Function for 24/7 bot hosting
