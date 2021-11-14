@@ -15,16 +15,17 @@ const prefix = "$";
 const GUILD_ID = process.env['guild_id'];
 const CLIENT_ID = process.env['client_id'];
 
+//Message on successful start and setting bot activity
+client.once("ready", () => {
+  console.log("Hasbulla vas sada posmatra !!");
+  client.user.setActivity("Zadruga 5" , { type: "WATCHING"});
+})
+
 //Making new player
 const player = new Player(client, {
     leaveOnEmpty: false, 
 });
 client.player = player;
-
-//Logging songs in the queue
-client.player.on('channelEmpty',  (queue) =>
-        console.log(`Everyone left the Voice Channel, queue ended.`)).on('songAdd',  (queue, song) =>
-        console.log(`Song ${song} was added to the queue.`));
 
 //Code which finds all files with .js extension
 client.commands = new Discord.Collection();
@@ -54,11 +55,7 @@ getJokes = () => {
       return data[0]["q"] + " - " + data[0]["a"];
     })
 }
-//Message on successful start and setting bot activity
-client.once("ready", () => {
-  console.log("Hasbulla vas sada posmatra !!");
-  client.user.setActivity("Zadruga 5" , { type: "WATCHING"});
-})
+
 
 //Commands
 client.on("messageCreate", async (msg) => {
@@ -70,15 +67,16 @@ client.on("messageCreate", async (msg) => {
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (msg.content === "$inspire") {
+    //Main commands
+  if (command === "help") {
+     client.commands.get('help').execute(msg, args, Discord);
+  } else if (command === 'inspire'){
     getQuote().then(quote => msg.reply(quote))
   } else if (command === "joke") {
     getJokes().then(jokes => msg.reply(jokes))
   } else if (command === 'clear'){
     client.commands.get('clear').execute(msg, args);
-    //With this 2 lines of code we can call the command demanded by user from other files.
-  } else if (command === 'help'){
-    client.commands.get('help').execute(msg, args, Discord);
+    //Music bot commands 
   } else if(command === 'play') {
         let queue = client.player.createQueue(msg.guild.id);
         await queue.join(msg.member.voice.channel);
@@ -92,21 +90,35 @@ client.on("messageCreate", async (msg) => {
           });
         let queue2 = player.getQueue(msg.guild.id);
         let { initMessage } = queue2.nowPlaying.data;
-        await initMessage.reply(`Now playing: ${song.name}`);
+        await initMessage.reply(`:musical_note:  Song: ${song.name} added to the queue! :writing_hand: `);
         
-    }else if (command === 'nowplaying') {
-        msg.reply(`Now playing: ${guildQueue.nowPlaying}`);
-    }else if (command === 'stop') {
-        guildQueue.stop();
-    }else if(command === 'playlist') {
-        let queue = client.player.createQueue(msg.guild.id);
-        await queue.join(msg.member.voice.channel);
-        let song = await queue.playlist(args.join(' ')).catch(_ => {
-            if(!guildQueue)
-                queue.stop();
-        });
-    }else if(command === 'skip') {
+    } else if (command === 'nowplaying') {
+        msg.reply(`Now playing:  ${guildQueue.nowPlaying}  :dvd:`);
+    } else  if(command === 'shuffle') {
+        guildQueue.shuffle();
+        msg.reply("Shuffle enabled! ")
+    } else  if(command === 'pause') {
+        guildQueue.setPaused(true);
+        msg.reply("Song paused! :pause_button: ")
+    } else if(command === 'resume') {
+        guildQueue.setPaused(false);
+        msg.reply("Song resumed! :arrow_forward: ")
+    } else if(command === 'skip') {
         guildQueue.skip();
+        msg.reply("Skipped! :ballot_box_with_check: ")
+    } else if (command === 'stop') {
+        guildQueue.stop();
+        msg.reply("Stopped, leaving channel! :wave: ");
+    } else if(command === 'remaining') {
+        const ProgressBar = guildQueue.createProgressBar();
+        msg.reply(' :hourglass: ' + ProgressBar.prettier + ' :hourglass_flowing_sand: ');
+    } else if(command === 'loop') {
+        if(guildQueue.setRepeatMode(RepeatMode.SONG)){
+          msg.reply("Loop enabled! :repeat:")
+        } else{
+          guildQueue.setRepeatMode(RepeatMode.DISABLED);
+          msg.reply("Loop disabled! :x: ")
+        }
     }
 })
 
