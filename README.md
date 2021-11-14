@@ -12,7 +12,7 @@ Command list (for now) :
 06. -- $shuffle --> Enables shuffle option.
 07. -- $pause --> Pauses the song..
 08. -- $resume --> Resumes the song.
-09. -- $skip ---> Skips the currently playing song.
+09. -- $skip --> Skips the currently playing song.
 10. -- $stop --> Stops the song and disconnects from channel.
 11. -- $remaining --> Shows the progress bar of the currently playing song.
 12. -- $loop --> Toggles the loop.
