@@ -5,7 +5,7 @@ Command list (for now) :
 
 00. -- $help --> Shows command list.
 01. -- $inspire --> Sends back inspirational quote.
-02. --- $joke --> Replies with a joke.
+02. -- $joke --> Replies with a joke.
 03. -- $clear --> Deletes desired amount of messages. (max 100).
 04. -- $play --> Plays the song, e.g. $play <song name> 
 05. -- $nowplaying --> Shows the currently playing song.' },
