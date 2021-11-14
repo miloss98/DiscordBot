@@ -16,7 +16,7 @@ const GUILD_ID = process.env['guild_id'];
 const CLIENT_ID = process.env['client_id'];
 
 //Message on successful start and setting bot activity
-client.once("ready", () => {
+client.on("ready", () => {
   console.log("Hasbulla vas sada posmatra !!");
   client.user.setActivity("Zadruga 5" , { type: "WATCHING"});
 })
@@ -35,28 +35,6 @@ for(const file of commandFiles){
   client.commands.set(command.name, command);
 }
 
-getJokes = () => {
-  return fetch('https://api.chucknorris.io/jokes/random')
-  .then(res => {
-    return res.json()
-  })
-  .then(data => {
-    return data.value;
-  })
-}
-
-//Zen quotes function + API
- getQuote = () => {
-  return fetch("https://zenquotes.io/api/random")
-    .then(res => {
-      return res.json()
-    })
-    .then(data => {
-      return data[0]["q"] + " - " + data[0]["a"];
-    })
-}
-
-
 //Commands
 client.on("messageCreate", async (msg) => {
 
@@ -67,13 +45,13 @@ client.on("messageCreate", async (msg) => {
   const args = msg.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-    //Main commands
+  //Main commands
   if (command === "help") {
      client.commands.get('help').execute(msg, args, Discord);
-  } else if (command === 'inspire'){
-    getQuote().then(quote => msg.reply(quote))
-  } else if (command === "joke") {
-    getJokes().then(jokes => msg.reply(jokes))
+  } else  if (command === "joke") {
+     client.commands.get('joke').execute(msg, args);
+  } else  if (command === "inspire") {
+     client.commands.get('inspire').execute(msg, args);
   } else if (command === 'clear'){
     client.commands.get('clear').execute(msg, args);
     //Music bot commands 
