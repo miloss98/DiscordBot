@@ -14,6 +14,6 @@ module.exports = {
          return data.value;
      })
     }
-    getJokes().then(quote => message.reply(quote));
+    getJokes().then(joke => message.reply(joke));
   }
 }
