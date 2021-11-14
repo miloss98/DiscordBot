@@ -78,6 +78,7 @@ client.on("messageCreate", async (msg) => {
     client.commands.get('clear').execute(msg, args);
     //Music bot commands 
   } else if(command === 'play') {
+      if(!args.length) return msg.reply("You need to enter song name! ");
         let queue = client.player.createQueue(msg.guild.id);
         await queue.join(msg.member.voice.channel);
         let song = await queue.play(args.join(' ')).catch(_ => {
