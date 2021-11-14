@@ -10,7 +10,7 @@ module.exports = {
    const newEmbed = new MessageEmbed()
 	  .setColor('#0099ff')
 	  .setTitle('View all commands')
-	  .setURL('https://youtube.com')
+	  .setURL('https://github.com/milos-stojanovic98/DiscordBot#readme')
 	  .setAuthor('Hasbi Discord Team', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz8kPGo8k-vDEpE4wSf6FAJKypbEA0CiEOLA&usqp=CAU')
 	  .setDescription('This is the list of all available commands:')
 	  .setThumbnail('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz8kPGo8k-vDEpE4wSf6FAJKypbEA0CiEOLA&usqp=CAU')
