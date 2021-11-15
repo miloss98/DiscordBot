@@ -52,7 +52,9 @@ client.on("messageCreate", async (msg) => {
      client.commands.get('joke').execute(msg, args);
   } else  if (command === "inspire") {
      client.commands.get('inspire').execute(msg, args);
-  } else if (command === 'clear'){
+  } else  if (command === 'weather') {
+     client.commands.get('weather').execute(client, msg, args, Discord);
+  }else if (command === 'clear'){
     client.commands.get('clear').execute(msg, args);
     //Music bot commands 
   } else if(command === 'play') {
