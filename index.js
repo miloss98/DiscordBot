@@ -60,8 +60,9 @@ client.on("messageCreate", async (msg) => {
   } else if(command === 'play') {
       if(!args.length) return msg.reply("You need to enter song name! ");
         let queue = client.player.createQueue(msg.guild.id);
-        await queue.join(msg.member.voice.channel);
-        let song = await queue.play(args.join(' ')).catch(_ => {
+        if(msg.member.voice.channel){
+         await queue.join(msg.member.voice.channel);
+         let song = await queue.play(args.join(' ')).catch(_ => {
             if(!guildQueue){
               queue.stop(); 
             }
@@ -69,12 +70,19 @@ client.on("messageCreate", async (msg) => {
         song.setData({
           initMessage: msg
           });
-        let queue2 = player.getQueue(msg.guild.id);
+           let queue2 = player.getQueue(msg.guild.id);
         let { initMessage } = queue2.nowPlaying.data;
         await initMessage.reply(`:musical_note:  Song: ${song.name} added to the queue! :writing_hand: `);
-        
+        } else {
+          msg.reply("You need to be in a voice channel!");
+        }
+  
     } else if (command === 'nowplaying') {
+        if(guildQueue){
         msg.reply(`Now playing:  ${guildQueue.nowPlaying}  :dvd:`);
+        }else{
+          msg.reply("Nothing is playing at the moment...")
+        }
     } else  if(command === 'shuffle') {
         guildQueue.shuffle();
         msg.reply("Shuffle enabled! ")
