@@ -8,13 +8,13 @@ module.exports = {
       weather.find({search: args.join(" "), degreeType: `C`}, function(error, result){
         
 
-        if(!args[0]) return message.channel.send(new messageEmbed()
+        if(!args[0]) return message.channel.send(new MessageEmbed()
         .setTitle('Please give info')
         .setColor("PURPLE")
         )
 
         if(result === undefined || result.length === 0)
-        return message.channel.send(new messageEmbed().setTitle('Invaldiddqwdqw')
+        return message.channel.send(new MessageEmbed().setTitle('Invaldiddqwdqw')
         .setColor("PURPLE")
         )
 

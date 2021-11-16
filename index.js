@@ -78,36 +78,65 @@ client.on("messageCreate", async (msg) => {
         }
   
     } else if (command === 'nowplaying') {
-        if(guildQueue){
-        msg.reply(`Now playing:  ${guildQueue.nowPlaying}  :dvd:`);
+        if(!guildQueue || guildQueue === undefined){
+          msg.reply("Nothing is playing at the moment...")
+        }else{
+           msg.reply(`Now playing:  ${guildQueue.nowPlaying}  :dvd:`);
+        }
+    } else if(command === 'shuffle') {
+      if(guildQueue){
+        guildQueue.shuffle();
+        msg.reply("Shuffle enabled!")
         }else{
           msg.reply("Nothing is playing at the moment...")
-        }
-    } else  if(command === 'shuffle') {
-        guildQueue.shuffle();
-        msg.reply("Shuffle enabled! ")
-    } else  if(command === 'pause') {
+        } 
+    } else if(command === 'pause') {
+      if(guildQueue){
         guildQueue.setPaused(true);
         msg.reply("Song paused! :pause_button: ")
+        }else{
+          msg.reply("Nothing is playing at the moment...")
+        }    
     } else if(command === 'resume') {
+       if(guildQueue){
         guildQueue.setPaused(false);
         msg.reply("Song resumed! :arrow_forward: ")
+        }else{
+          msg.reply("Nothing is playing at the moment...")
+        } 
     } else if(command === 'skip') {
+       if(guildQueue){
         guildQueue.skip();
         msg.reply("Skipped! :ballot_box_with_check: ")
+       }else{
+         msg.reply("Nothing is playing at the moment...")
+       }
     } else if (command === 'stop') {
+      if(guildQueue){
         guildQueue.stop();
         msg.reply("Stopped, leaving channel! :wave: ");
+      }else{
+        msg.reply("Nothing is playing at the moment...")
+      }
+
     } else if(command === 'remaining') {
+      if(guildQueue){
         const ProgressBar = guildQueue.createProgressBar();
         msg.reply(' :hourglass: ' + ProgressBar.prettier + ' :hourglass_flowing_sand: ');
+      }else{
+        msg.reply("Nothing is playing at the moment...")
+      }
     } else if(command === 'loop') {
+      if(guildQueue){
         if(guildQueue.setRepeatMode(RepeatMode.SONG)){
           msg.reply("Loop enabled! :repeat:")
         } else{
           guildQueue.setRepeatMode(RepeatMode.DISABLED);
           msg.reply("Loop disabled! :x: ")
         }
+    }else{
+      msg.reply("Nothing is playing at the moment...")
+    }
     }
 })
 
