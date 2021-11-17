@@ -27,13 +27,12 @@ const player = new Player(client, {
 });
 client.player = player;
 
-//Code which finds all files with .js extension
+//Command handlers
 client.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for(const file of commandFiles){
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
-}
+client.events = new Discord.Collection();
+['command_handler', 'event_handler'].forEach(handler => {
+  require(`./handlers/${handler}`)(client, Discord);
+})
 
 //Commands
 client.on("messageCreate", async (msg) => {
