@@ -6,17 +6,13 @@ module.exports = {
   description: 'weatwqewqewq',
   async execute(client, message, args, Discord){
       weather.find({search: args.join(" "), degreeType: `C`}, function(error, result){
+       
         
-
-        if(!args[0]) return message.channel.send(new MessageEmbed()
-        .setTitle('Please give info')
-        .setColor("PURPLE")
-        )
+        if(!args[0]) return message.reply("Search input missing!")
 
         if(result === undefined || result.length === 0)
-        return message.channel.send(new MessageEmbed().setTitle('Invaldiddqwdqw')
-        .setColor("PURPLE")
-        )
+        return message.reply("Invalid input!");
+        
 
         let current = result[0].current;
         let location = result[0].location;
@@ -41,7 +37,7 @@ module.exports = {
             
             m.edit(embed);
             
-            message.channel.send({ embeds: [embed] });
+           message.channel.send({ embeds: [embed] });
 
 
         })
