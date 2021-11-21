@@ -6,13 +6,10 @@ module.exports = {
   description: 'weatwqewqewq',
   async execute(client, message, args, Discord){
       weather.find({search: args.join(" "), degreeType: `C`}, function(error, result){
-       
-        
         if(!args[0]) return message.reply("Search input missing!")
-
+      
         if(result === undefined || result.length === 0)
         return message.reply("Invalid input!");
-        
 
         let current = result[0].current;
         let location = result[0].location;
@@ -39,9 +36,7 @@ module.exports = {
             
            message.channel.send({ embeds: [embed] });
 
-
         })
-
       })
   }
 }
