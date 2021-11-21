@@ -1,10 +1,7 @@
 const Discord = require("discord.js");
 const { Client, Intents } = require("discord.js");
 const keepAlive = require("./server");
-const fetch = require("node-fetch");
-const fs = require("fs");
-const { RepeatMode } = require('discord-music-player');
-const { Player } = require("discord-music-player");
+const { RepeatMode, Player } = require('discord-music-player');
 
 const client = new Discord.Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES]});
 
