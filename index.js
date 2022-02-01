@@ -14,8 +14,8 @@ const CLIENT_ID = process.env['client_id'];
 
 //Message on successful start and setting bot activity
 client.on("ready", () => {
-  console.log("Hasbulla vas sada posmatra !!");
-  client.user.setActivity("Zadruga 5" , { type: "WATCHING"});
+  console.log("Bot is now running!");
+  client.user.setActivity("$help" , { type: "LISTENING"});
 })
 
 //Making new player
