@@ -1,4 +1,6 @@
-#Developing discord bot
+#Developing Discord Bot with a goal to practice Node.js.
+
+
 
 Command list (for now) :
 
