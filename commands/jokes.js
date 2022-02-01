@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 module.exports = {
   name: 'joke',
-  description: 'send back a joke',
+  description: 'sends back a joke',
   execute(message, args){
     
      getJokes = () => {

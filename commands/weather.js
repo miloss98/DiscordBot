@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
   name: 'weather',
-  description: 'weatwqewqewq',
+  description: 'weather info',
   async execute(client, message, args, Discord){
       weather.find({search: args.join(" "), degreeType: `C`}, function(error, result){
         if(!args[0]) return message.reply("Search input missing!")
